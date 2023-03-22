@@ -1,0 +1,17 @@
+{
+    "npm.packageManager": "yarn",
+    "eslint.packageManager": "yarn",
+    "eslint.run": "onType",
+    "cSpell.language": "en,ru",
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "eslint.codeActionsOnSave.rules": null,
+    "[typescriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "cSpell.words": ["creds", "immer", "optimizelegibility", "rtoken", "toastify", "zustand"],
+    "json.schemas": [],
+    "typescript.tsdk": "node_modules\\typescript\\lib",
+    "typescript.enablePromptUseWorkspaceTsdk": true
+  }
+  
