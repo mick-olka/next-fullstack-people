@@ -1,3 +1,4 @@
+import AddRoundedIcon from '@mui/icons-material/AddRounded'
 import { Avatar, Box, Button, CardMedia } from '@mui/material'
 import Link from 'next/link'
 import React, { useState } from 'react'
@@ -8,10 +9,11 @@ import PeopleTable from '@/components/PeopleTable/PeopleTable'
 
 import { MainLayout } from '@/containers/Layouts/MainLayout/MainLayout'
 import { useDeletePerson, useGetPeopleList } from '@/hooks/usePeople'
-import { SGridPane } from '@/styles/general'
+import { RoundButton, SGridPane } from '@/styles/general'
 import { SquareCard } from '@/components/Card/Card'
 import { AddPersonDialog } from '@/components/Dialogs/AddPersonDialog'
 import { PersonGrid } from '@/components/PersonGrid/PersonGrid'
+import { SearchField } from '@/components/Search/SearchField'
 
 export default function Lab2Page() {
   const { data, mutate } = useGetPeopleList()
@@ -27,11 +29,19 @@ export default function Lab2Page() {
   return (
     <MainLayout title='Lab1' description='Lab1'>
       <S.Pane>
-        <Box sx={{ margin: '1rem' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            // justifyContent: 'center',
+            alignItems: 'center',
+            '& > *': { margin: '1rem' },
+          }}
+        >
           <h1>Lab #2</h1>
-          <Button variant='contained' onClick={() => setAddPersonDialogOpen(true)}>
-            Add New Person
-          </Button>
+          <RoundButton variant='contained' onClick={() => setAddPersonDialogOpen(true)}>
+            <AddRoundedIcon />
+          </RoundButton>
+          <SearchField onSearch={() => null} />
         </Box>
         {data && (
           <>

@@ -1,6 +1,10 @@
+import { FormLabel, RadioGroup, FormControlLabel, Radio, Box } from '@mui/material'
 import { useForm } from 'react-hook-form'
 
+import { ColorChangeHandler, SketchPicker } from 'react-color'
+
 import * as S from './styles'
+import { ColorPicker } from '../Color/ColorPicker'
 
 export interface I_PersonForm {
   name: string
@@ -38,6 +42,9 @@ export const PersonForm = ({ onSubmit, initData }: I_Props) => {
     register,
     handleSubmit,
     formState: { errors },
+    getValues,
+    setValue,
+    watch,
   } = useForm<I_PersonForm>({
     defaultValues: initData || def,
   })
@@ -51,7 +58,7 @@ export const PersonForm = ({ onSubmit, initData }: I_Props) => {
   ) => {
     return (
       <S.TextFieldBox>
-        <label>{title}</label>
+        <FormLabel>{title}</FormLabel>
         <S.TextFieldStyled
           type={type}
           error={!!errors[field]}
@@ -61,19 +68,31 @@ export const PersonForm = ({ onSubmit, initData }: I_Props) => {
     )
   }
 
+  watch('color')
+
   return (
     <S.Pane>
       <form onSubmitCapture={handleSubmit(onSubmit)}>
         {field('Name', 'name', 'text', true)}
         {field('Phone', 'phone', 'text')}
         {field('Age', 'age', 'number')}
-        {field('Sex', 'sex', 'text')}
+        <S.TextFieldBox>
+          <FormLabel>Gender</FormLabel>
+          <RadioGroup row defaultValue={'male'} {...register('sex')}>
+            <FormControlLabel value='female' control={<Radio />} label='Female' />
+            <FormControlLabel value='male' control={<Radio />} label='Male' />
+            <FormControlLabel value='robot' control={<Radio />} label='Other' />
+          </RadioGroup>
+        </S.TextFieldBox>
         {field('Date of Birth', 'dob', 'date')}
         {field('Email', 'email', 'text')}
         {field('About', 'about', 'text')}
         {field('Country', 'country', 'text')}
         {field('Address', 'address', 'text')}
         {field('Profile Color', 'color', 'text')}
+        <S.TextFieldBox>
+          {/* <ColorPicker color={getValues('color')} onChange={(c) => setValue('color', c)} /> */}
+        </S.TextFieldBox>
 
         <S.ButtonStyled variant='contained' type='submit' disabled={isLoading}>
           {isLoading ? 'Loading...' : 'Save'}

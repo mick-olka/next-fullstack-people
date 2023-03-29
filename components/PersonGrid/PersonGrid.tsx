@@ -1,7 +1,6 @@
 import { SGridPane } from '@/styles/general'
 import { I_Person } from '@/utils/Models'
 import { Avatar, Box } from '@mui/material'
-import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { SquareCard } from '../Card/Card'
 import { PersonInfoDialog } from '../Dialogs/PersonInfoDialog'
@@ -20,8 +19,7 @@ export const PersonGrid = ({ data }: { data: I_Person[] }) => {
   return (
     <SGridPane>
       {data.map((p, i) => (
-        // <Link key={p._id} href='/lab1'>
-        <SquareCard>
+        <SquareCard key={p._id}>
           <Box
             sx={{
               display: 'flex',
@@ -37,7 +35,7 @@ export const PersonGrid = ({ data }: { data: I_Person[] }) => {
             <Avatar
               sx={{ width: 176, height: 176, margin: '0 auto' }}
               alt={p.name}
-              src={`https://xsgames.co/randomusers/assets/avatars/${p.sex}/${i}.jpg`}
+              src={`https://xsgames.co/randomusers/assets/avatars/${p.sex}/${p.age}.jpg`}
             />
             <Box
               sx={{
@@ -51,7 +49,7 @@ export const PersonGrid = ({ data }: { data: I_Person[] }) => {
         </SquareCard>
         // </Link>
       ))}
-      <PersonInfoDialog person_id={personId!} open={open} setOpen={setOpen} />
+      {personId && <PersonInfoDialog person_id={personId} open={open} setOpen={setOpen} />}
     </SGridPane>
   )
 }

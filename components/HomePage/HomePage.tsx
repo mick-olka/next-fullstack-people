@@ -14,7 +14,7 @@ export const HomePage = () => {
       <h1>HomePage</h1>
       <SGridPane>
         {labs.map((l) => (
-          <Link key={l.path} href='/lab1'>
+          <Link key={l.path} href={l.path}>
             <SquareCard>
               <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                 <h2>{l.name}</h2>

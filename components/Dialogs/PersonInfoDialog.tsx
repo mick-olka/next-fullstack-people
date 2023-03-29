@@ -2,6 +2,7 @@ import { people_api_url, useCreatePerson, useGetPerson, useUpdatePerson } from '
 import { Box, Skeleton } from '@mui/material'
 import Link from 'next/link'
 import React from 'react'
+import { PersonProfile } from '../PersonProfile/PersonProfile'
 // import { useSWRConfig } from 'swr'
 // import { I_PersonForm, PersonForm } from '../PersonForm/PersonForm'
 import DialogContainer from './DialogContainer'
@@ -42,9 +43,13 @@ export const PersonInfoDialog = ({ person_id, open, setOpen }: I_Props) => {
 
   if (data)
     return (
-      <DialogContainer title='Profile' text={data.about} open={open} setOpen={setOpen}>
-        <S.Pane>{data && data.name}</S.Pane>
-        <Box sx={{ textDecoration: 'underline', margin: '1rem' }}>
+      <DialogContainer open={open} setOpen={setOpen}>
+        <S.Pane>
+          <PersonProfile data={data} short />
+        </S.Pane>
+        <Box
+          sx={{ textDecoration: 'underline', margin: '1rem 0', width: '100%', textAlign: 'center' }}
+        >
           <Link href={'/lab1/person/info/' + data._id}>More details</Link>
         </Box>
       </DialogContainer>

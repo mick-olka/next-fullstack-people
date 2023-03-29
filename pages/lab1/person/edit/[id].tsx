@@ -29,7 +29,7 @@ export default function EditPersonPage({ data: initData }: { data: I_Person }) {
 
   const handleSubmit = async (data: I_PersonForm) => {
     await handleUpdate(data)
-    router.push('/lab1')
+    router.push('/lab2')
   }
 
   return (

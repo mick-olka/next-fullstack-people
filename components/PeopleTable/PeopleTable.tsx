@@ -1,3 +1,4 @@
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
 import {
   Paper,
   TableBody,
@@ -33,28 +34,30 @@ export default function PeopleTable({
         <S.TableStyled aria-label='simple table'>
           <TableHead>
             <TableRow>
-              <TableCell align='right'>Name</TableCell>
-              <TableCell align='right'>Age</TableCell>
-              <TableCell align='right'>Sex</TableCell>
-              <TableCell align='right'>Phone</TableCell>
-              <TableCell align='right'>Email</TableCell>
-              <TableCell align='right'>_</TableCell>
+              <TableCell align='left'>Name</TableCell>
+              <TableCell align='left'>Age</TableCell>
+              <TableCell align='left'>Sex</TableCell>
+              <TableCell align='left'>Phone</TableCell>
+              <TableCell align='left'>Email</TableCell>
+              <TableCell align='left'>_</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {rows.map((row) => (
               <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                <TableCell align='right'>
+                <TableCell align='left'>
                   <Link href={`/lab1/person/info/${row._id}`}>
                     <Typography sx={{ textDecoration: 'underline' }}>{row.name}</Typography>
                   </Link>
                 </TableCell>
-                <TableCell align='right'>{row.age}</TableCell>
-                <TableCell align='right'>{row.sex}</TableCell>
-                <TableCell align='right'>{row.phone}</TableCell>
-                <TableCell align='right'>{row.email}</TableCell>
-                <TableCell onClick={() => onDelete(row._id)} align='right'>
-                  <Button>del</Button>
+                <TableCell align='left'>{row.age}</TableCell>
+                <TableCell align='left'>{row.sex}</TableCell>
+                <TableCell align='left'>{row.phone}</TableCell>
+                <TableCell align='left'>{row.email}</TableCell>
+                <TableCell onClick={() => onDelete(row._id)} align='left'>
+                  <Button>
+                    <DeleteOutlineOutlinedIcon />
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}

@@ -52,12 +52,13 @@ I_Props) {
 
   return (
     <div>
-      <Dialog open={open} onClose={handleClose} TransitionComponent={Transition}>
-        {title && (
-          <DialogTitle>
-            <h4 style={{ textAlign: 'center' }}>{title}</h4>
-          </DialogTitle>
-        )}
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        TransitionComponent={Transition}
+        sx={{ '.MuiPaper-root': { maxWidth: 'calc(100% - 64px)' } }}
+      >
+        {title && <DialogTitle>{title}</DialogTitle>}
         <DialogContent>
           {text && <DialogContentText>{text}</DialogContentText>}
           {children}

@@ -60,7 +60,7 @@ export default function ResponsiveDrawer() {
         aria-label='open drawer'
         edge='start'
         onClick={handleDrawerToggle}
-        sx={{ left: '1rem', position: 'absolute', top: '1rem', display: { md: 'none' } }}
+        // sx={{ left: '1rem', position: 'absolute', top: '1rem', display: { md: 'none' } }}
       >
         <MenuIcon />
       </IconButton>
