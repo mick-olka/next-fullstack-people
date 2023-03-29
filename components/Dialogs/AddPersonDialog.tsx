@@ -1,7 +1,7 @@
 import { people_api_url, useCreatePerson } from '@/hooks/usePeople'
 import React from 'react'
 import { useSWRConfig } from 'swr'
-import { I_PersonForm, PersonForm } from '../PersonForm/PersonForm'
+import { I_PersonForm, PersonForm } from '../People/PersonForm/PersonForm'
 import DialogContainer from './DialogContainer'
 
 import * as S from './styles'
@@ -26,12 +26,7 @@ export const AddPersonDialog = ({ open, setOpen }: I_Props) => {
   }
 
   return (
-    <DialogContainer
-      title='Add Person'
-      //   text='Fill form and submit to create new person'
-      open={open}
-      setOpen={setOpen}
-    >
+    <DialogContainer title='Add Person' open={open} setOpen={setOpen}>
       <S.Pane>
         <PersonForm onSubmit={handleSubmit} />
       </S.Pane>

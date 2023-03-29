@@ -16,8 +16,14 @@ const field = (label: string, text: string) => (
 
 export const PersonProfile = ({ data, short }: { data: I_Person; short?: boolean }) => {
   return (
-    <S.Pane>
-      <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
+    <S.Pane color={data.color}>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          marginBottom: '1rem',
+        }}
+      >
         <h1 style={{ margin: 0 }}>{data.name}</h1>
         <Link href={`/lab1/person/edit/${data._id}`}>
           <IconButton sx={{ marginLeft: '1rem' }}>
@@ -33,7 +39,7 @@ export const PersonProfile = ({ data, short }: { data: I_Person; short?: boolean
       {field('Phone Number', data.phone)}
       {field('Age', String(data.age))}
       {field('Sex', data.sex)}
-      {field('Date of Birth', String(data.dob))}
+      {field('Date of Birth', String(data.dob).split('T')[0])}
       {!short && (
         <>
           {field('Email', data.email)}

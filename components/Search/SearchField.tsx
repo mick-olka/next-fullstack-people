@@ -25,7 +25,13 @@ export const SearchField = ({
   }
   return (
     <S.Pane>
-      <TextField value={text} onChange={handleChange} variant='filled' size='small' />
+      <TextField
+        value={text}
+        onChange={handleChange}
+        variant='filled'
+        size='small'
+        // sx={{ '& input': { fontSize: '1.2rem' } }}
+      />
       <RoundButton onClick={triggerSearch} sx={{ marginLeft: '0.5rem' }} variant='contained'>
         <SearchOutlinedIcon />
       </RoundButton>

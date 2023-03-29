@@ -1,13 +1,9 @@
-import { Button } from '@mui/material'
-import Image from 'next/image'
-import Link from 'next/link'
-
 import * as S from './styles'
 
 import { MainLayout } from '@/containers/Layouts/MainLayout/MainLayout'
 import { getPerson } from '@/hooks/usePeople'
 import { I_Person } from '@/utils/Models'
-import { PersonProfile } from '@/components/PersonProfile/PersonProfile'
+import { PersonProfile } from '@/components/People/PersonProfile/PersonProfile'
 
 export async function getServerSideProps({ params }: { params: { id: string } }): Promise<{
   props: { data: I_Person }

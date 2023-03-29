@@ -1,10 +1,8 @@
 import { FormLabel, RadioGroup, FormControlLabel, Radio, Box } from '@mui/material'
 import { useForm } from 'react-hook-form'
 
-import { ColorChangeHandler, SketchPicker } from 'react-color'
-
 import * as S from './styles'
-import { ColorPicker } from '../Color/ColorPicker'
+import { ColorPicker } from '../../Color/ColorPicker'
 
 export interface I_PersonForm {
   name: string
@@ -91,7 +89,7 @@ export const PersonForm = ({ onSubmit, initData }: I_Props) => {
         {field('Address', 'address', 'text')}
         {field('Profile Color', 'color', 'text')}
         <S.TextFieldBox>
-          {/* <ColorPicker color={getValues('color')} onChange={(c) => setValue('color', c)} /> */}
+          <ColorPicker color={getValues('color')} onChange={(c) => setValue('color', c)} />
         </S.TextFieldBox>
 
         <S.ButtonStyled variant='contained' type='submit' disabled={isLoading}>

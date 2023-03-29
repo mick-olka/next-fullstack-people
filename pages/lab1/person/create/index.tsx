@@ -2,7 +2,7 @@ import { useSWRConfig } from 'swr'
 
 import * as S from './styles'
 
-import { I_PersonForm, PersonForm } from '@/components/PersonForm/PersonForm'
+import { I_PersonForm, PersonForm } from '@/components/People/PersonForm/PersonForm'
 import { MainLayout } from '@/containers/Layouts/MainLayout/MainLayout'
 import { useCreatePerson, people_api_url } from '@/hooks/usePeople'
 import { useRouter } from 'next/router'

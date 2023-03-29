@@ -1,9 +1,10 @@
 import { connectToDatabase } from '../connection'
+import { getFilterForSearch } from '../helpers'
 import { I_Person, Person } from '../Models'
 
 connectToDatabase()
-export async function getList(): Promise<I_Person[]> {
-  const list = await Person.find()
+export async function getList({ regex }: { regex?: string }): Promise<I_Person[]> {
+  const list = await Person.find(getFilterForSearch(regex, ['name', 'email', 'country']))
   return list
 }
 export async function getById(id: string): Promise<I_Person | null> {
@@ -27,4 +28,9 @@ export async function update(
 export async function deleteById(id: string): Promise<I_Person | null> {
   const doc = await Person.findByIdAndDelete(id)
   return doc
+}
+
+export async function deleteMany(ids: string[]): Promise<string[]> {
+  await Promise.all(ids.map((id) => Person.findByIdAndDelete(id)))
+  return ids
 }

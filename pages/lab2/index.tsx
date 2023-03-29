@@ -1,29 +1,32 @@
 import AddRoundedIcon from '@mui/icons-material/AddRounded'
-import { Avatar, Box, Button, CardMedia } from '@mui/material'
-import Link from 'next/link'
+import { Box } from '@mui/material'
 import React, { useState } from 'react'
 
 import * as S from './styles'
-
-import PeopleTable from '@/components/PeopleTable/PeopleTable'
 
 import { MainLayout } from '@/containers/Layouts/MainLayout/MainLayout'
 import { useDeletePerson, useGetPeopleList } from '@/hooks/usePeople'
 import { RoundButton, SGridPane } from '@/styles/general'
 import { SquareCard } from '@/components/Card/Card'
 import { AddPersonDialog } from '@/components/Dialogs/AddPersonDialog'
-import { PersonGrid } from '@/components/PersonGrid/PersonGrid'
+import { PersonGrid, PeopleTable, PersonCard } from '@/components/People'
 import { SearchField } from '@/components/Search/SearchField'
+import { useRouter } from 'next/router'
+import { PeopleSlider } from '@/components/People'
 
 export default function Lab2Page() {
-  const { data, mutate } = useGetPeopleList()
-  const { trigger: triggerDelete } = useDeletePerson()
+  const [query, setQuery] = useState<string | null>(null)
+  const { data, mutate } = useGetPeopleList(query || undefined)
+  const navigate = useRouter()
 
   const [addPersonDialogOpen, setAddPersonDialogOpen] = useState(false)
 
-  const handleDelete = async (id: string) => {
-    await triggerDelete(id)
-    mutate()
+  const onRowClick = (id: string) => {
+    navigate.push('/lab1/person/edit/' + id)
+  }
+
+  const handleSearchTrigger = (query: string) => {
+    setQuery(query || null)
   }
 
   return (
@@ -32,6 +35,7 @@ export default function Lab2Page() {
         <Box
           sx={{
             display: 'flex',
+            width: '100%',
             // justifyContent: 'center',
             alignItems: 'center',
             '& > *': { margin: '1rem' },
@@ -41,14 +45,26 @@ export default function Lab2Page() {
           <RoundButton variant='contained' onClick={() => setAddPersonDialogOpen(true)}>
             <AddRoundedIcon />
           </RoundButton>
-          <SearchField onSearch={() => null} />
+          <SearchField onSearch={handleSearchTrigger} />
         </Box>
         {data && (
           <>
             <PersonGrid data={data} />
             <Box sx={{ marginTop: '2rem' }}>
               <h1 style={{ margin: '1rem' }}>Statistics</h1>
-              <PeopleTable list={data} onDelete={handleDelete} />
+              <PeopleTable
+                list={data}
+                // onSelect={(ids) => setSelected(ids)}
+                onRowClick={onRowClick}
+              />
+            </Box>
+            <Box sx={{ textAlign: 'center', margin: '3rem 0' }}>
+              <h2>Favorites</h2>
+              <PeopleSlider>
+                {data.map((p) => (
+                  <PersonCard data={p} onClick={() => null} />
+                ))}
+              </PeopleSlider>
             </Box>
           </>
         )}

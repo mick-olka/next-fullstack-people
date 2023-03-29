@@ -22,6 +22,12 @@ export const people_api_url = '/api/people/'
 const deletePerson = async (url: string, { arg }: { arg: string }) =>
   swrMutationCreator<I_Person>(url + arg, { method: 'DELETE' })
 
+const deleteManyPerson = async (url: string, { arg }: { arg: string[] }) =>
+  swrMutationCreator<I_Person>(url, {
+    method: 'PATCH',
+    body: JSON.stringify({ data: { ids: arg } }),
+  })
+
 const createPerson = async (url: string, { arg }: { arg: I_PersonDTO }) =>
   swrMutationCreator<I_Person>(url, { method: 'POST', body: JSON.stringify({ data: arg }) })
 
@@ -44,8 +50,9 @@ export const getPerson = async (id: string): Promise<I_Person> => {
   } else throw new Error(String(res.body))
 }
 
-export const useGetPeopleList = () => {
-  const data = useSWR<I_Person[]>(people_api_url, fetcher)
+export const useGetPeopleList = (regex?: string) => {
+  const url = regex ? `${people_api_url}?regex=${regex}` : people_api_url
+  const data = useSWR<I_Person[]>(url, fetcher)
   return data
 }
 
@@ -61,6 +68,11 @@ export const useCreatePerson = () => {
 
 export const useDeletePerson = () => {
   const data = useSWRMutation(people_api_url, deletePerson)
+  return data
+}
+
+export const useDeleteManyPerson = () => {
+  const data = useSWRMutation(people_api_url, deleteManyPerson)
   return data
 }
 
